@@ -1,12 +1,5 @@
 import time as ttime
-import math
-
-
-def get_solutions_polynomial(time, distance):
-    sol_sqrt = math.sqrt(pow(time, 2) - 4*(-1)*(-distance))
-    x1 = (-time + sol_sqrt)/-2.0
-    x2 = (-time - sol_sqrt)/-2.0
-    return (math.floor(x1+1), math.ceil(x2-1)) if x1 < x2 else (math.ceil(x1-1), math.floor(x2+1))
+from math import ceil, floor, sqrt
 
 
 def main(stage=1):
@@ -23,18 +16,14 @@ def main(stage=1):
 
         for time, distance in zip(times, distances):
             time, distance = int(time), int(distance)
-            t1, t2 = get_solutions_polynomial(time, distance)
+            sol_sqrt = sqrt(pow(time, 2) - 4 * (-1) * (-distance))
+            x1 = (-time + sol_sqrt) / -2.0
+            x2 = (-time - sol_sqrt) / -2.0
+            t1, t2 = (floor(x1 + 1), ceil(x2 - 1)) if x1 < x2 else (ceil(x1 - 1), floor(x2 + 1))
             margin_of_error *= (abs(t2-t1)+1)
-        
         print(margin_of_error)
 
-# t*x - x2 > d
-# -x2 + t*x + 0 > d
-# -x2 + t*x -d > 0
-# -1x2 + 1t*x -d = 0
 
-# x = -(1t) +- sqrt((1t)^2 - 4*(-1)*(-d))/-2
-#56717999, 334113513502430
 if __name__ == '__main__':
     start = ttime.time()
     main(1)
