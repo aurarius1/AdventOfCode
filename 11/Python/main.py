@@ -2,9 +2,9 @@ import time
 
 
 def get_expansion_map(curr_map):
-    expansions = {k: 0 for k in range(len(curr_map))}
+    expansions = {}
     for i in range(len(curr_map)):
-        expansions[i] += expansions.get(i - 1, 0)
+        expansions[i] = expansions.get(i - 1, 0)
         if "#" not in curr_map[i]:
             expansions[i] += 1
     return expansions
@@ -20,7 +20,7 @@ def main(input_file, stage=1):
         # expansion factor reduced by one, as if one row is empty only one row will be added, not two
         expansion_factor = 1
         if stage == 2:
-            expansion_factor = 1000000-1
+            expansion_factor = 10**6-1
 
 
         # original code from stage 1, "bruteforce", just adding the rows directly
