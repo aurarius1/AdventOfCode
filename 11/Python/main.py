@@ -20,7 +20,7 @@ def main(input_file, stage=1):
         # expansion factor reduced by one, as if one row is empty only one row will be added, not two
         expansion_factor = 1
         if stage == 2:
-            expansion_factor = 1000000-1
+            expansion_factor = 10**6-1
 
 
         # original code from stage 1, "bruteforce", just adding the rows directly
