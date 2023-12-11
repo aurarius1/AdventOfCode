@@ -2,9 +2,9 @@ import time
 
 
 def get_expansion_map(curr_map):
-    expansions = {k: 0 for k in range(len(curr_map))}
+    expansions = {}
     for i in range(len(curr_map)):
-        expansions[i] += expansions.get(i - 1, 0)
+        expansions[i] = expansions.get(i - 1, 0)
         if "#" not in curr_map[i]:
             expansions[i] += 1
     return expansions
