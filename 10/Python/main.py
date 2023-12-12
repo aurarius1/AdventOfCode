@@ -153,7 +153,7 @@ def main(input_file, stage=1):
 
 
 if __name__ == "__main__":
-    use_example = False
+    use_example = True
     file_name = "example" if use_example else "input"
 
     start_time = time.time()
@@ -163,7 +163,7 @@ if __name__ == "__main__":
     start_time = time.time()
     append_stage2 = True
     if use_example and append_stage2:
-        file_name += "_stage2_2"
+        file_name += "_stage2_1"
 
     main(file_name, 2)
     print(f"Stage 2 time: {time.time()-start_time:.10f}")
