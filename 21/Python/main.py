@@ -60,7 +60,6 @@ def main2(garden_plots, gardener, steps, replacements, out_file=""):
     directions = [Position((1, 0)), Position((0, -1)), Position((-1, 0)), Position((0, 1))]
     lookup_table = {i: ({} if i > 0 else {gardener: ["S", 0]}) for i in range(steps+1)}
 
-    neg_one_queue = set()
     for i in range(1, steps+1):
         for e in range(len(directions)):
             endpoint = i*directions[e]
@@ -77,8 +76,6 @@ def main2(garden_plots, gardener, steps, replacements, out_file=""):
                 step_init = -2 if garden_plots[curr[0]][curr[1]] == "#" else -1
                 lookup_table[i][curr] = [garden_plots[curr[0]][curr[1]], step_init]
                 if not step_possible(lookup_table, i, endpoint, direction, garden_plots, curr):
-                    if step_init == -1:
-                        neg_one_queue.add((curr, i))
                     endpoint = endpoint + direction
                     continue
                 lookup_table[i][curr][1] = i
@@ -86,33 +83,28 @@ def main2(garden_plots, gardener, steps, replacements, out_file=""):
                 garden_plots[curr[0]][curr[1]] = replacements[i % 2]
                 endpoint = endpoint + direction
 
-
-    # it could be needed to sort it, don't know tbh
-    #neg_one_queue = sorted(neg_one_queue, key=lambda x: (x[0]-gardener), reverse=True)
     # fill gaps, that were blocked by # in the first iteration
-    while neg_one_queue:
-        node, key = neg_one_queue.pop()
-        match = False
-        stone_cnt = 0
-        for direction in directions:
-            curr = node + direction
+    # do this until there are no changes left
+    changes = 1
+    while changes != 0:
+        changes = 0
+        for key, nodes in lookup_table.items():
+            for node in nodes:
+                if lookup_table[key][node][1] != -1:
+                    continue
+                for direction in directions:
+                    curr = node + direction
+                    t = lookup_table.get(key-1, {}).get(curr, None)
+                    for i in range(key, steps+1):
+                        if t is not None:
+                            break
+                        t = lookup_table.get(i, {}).get(curr, None)
 
-            cnt = -1
-            while (t := lookup_table.get(key+cnt, {}).get(curr, None)) is None and cnt <= 1:
-                cnt += 1
-
-            if not str.isdigit(t[0]) or (t[1] + 1) > steps:
-                stone_cnt += (1 if t[0] == "#" else 0)
-                continue
-
-            lookup_table[key][node] = [str((t[1] + 1) % 10), t[1] + 1]
-            garden_plots[node[0]][node[1]] = replacements[(t[1] + 1) % 2]
-            stone_cnt = 0
-            match = True
-            break
-        if not match and stone_cnt < 4:
-            neg_one_queue.add((node, key))
-
+                    if t is None or not str.isdigit(t[0]) or t[1]+1 > steps:
+                        continue
+                    lookup_table[key][node] = [str((t[1]+1)%10), t[1]+1]
+                    garden_plots[node[0]][node[1]] = replacements[(t[1]+1)%2]
+                    changes += 1
     max_plots_even = 1              # start at one for S
     max_plots_odd = 0
 
@@ -140,7 +132,7 @@ def main(input_file, stage=1):
             return
 
         if input_file == "example":
-            steps = 6
+            steps = 5
             elf_max_steps = 50
             print("Stage 2 does not work with the example")
             return
@@ -153,11 +145,13 @@ def main(input_file, stage=1):
 
         steps = len(garden_plots[0])
         full_steps = main2(garden_plots, gardener, steps, replacements)
+        n = elf_max_steps // steps
+
 
         corner_even = full_steps[0] - diamond_steps[0]
         corner_odd = full_steps[1] - diamond_steps[1]
 
-        n = elf_max_steps // steps
+
 
         t = (n + 1) ** 2 * full_steps[1] + n ** 2 * full_steps[0] + n * corner_even - ((n + 1) * corner_odd)
         print(t)
@@ -165,7 +159,7 @@ def main(input_file, stage=1):
 
 
 if __name__ == "__main__":
-    use_example = False
+    use_example = True
     file = "example" if use_example else "input"
 
     start = time.time()
