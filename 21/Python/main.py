@@ -147,11 +147,8 @@ def main(input_file, stage=1):
         full_steps = main2(garden_plots, gardener, steps, replacements)
         n = elf_max_steps // steps
 
-
         corner_even = full_steps[0] - diamond_steps[0]
         corner_odd = full_steps[1] - diamond_steps[1]
-
-
 
         t = (n + 1) ** 2 * full_steps[1] + n ** 2 * full_steps[0] + n * corner_even - ((n + 1) * corner_odd)
         print(t)
@@ -159,7 +156,7 @@ def main(input_file, stage=1):
 
 
 if __name__ == "__main__":
-    use_example = True
+    use_example = False
     file = "example" if use_example else "input"
 
     start = time.time()
