@@ -9,3 +9,5 @@
 *.dot
 
 **/lib
+/.aoc_tiles/**/*
+!/.aoc_tiles/tiles/
