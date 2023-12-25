@@ -11,5 +11,6 @@
 **/lib
 session.cookie
 
-/.aoc_tiles/**/*
-!/.aoc_tiles/tiles/*
+
+.aoc_tiles/*
+!/.aoc_tiles/tiles
