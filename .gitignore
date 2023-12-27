@@ -3,7 +3,6 @@
 **/main
 **/input
 **/config
-**/example*
 *.pyc
 
 *.dot
