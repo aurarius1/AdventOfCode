@@ -78,16 +78,15 @@
   <img src=".aoc_tiles/tiles/2023/25.png" width="161px">
 </a>
 <h1 align="center">
-  2022 - 4 ⭐
+  2022 - 6 ⭐
 </h1>
 <a href="2022/01/Python/main.py">
   <img src=".aoc_tiles/tiles/2022/01.png" width="161px">
 </a>
-<a href="2022/02/main.py">
+<a href="2022/02/Python/main.py">
   <img src=".aoc_tiles/tiles/2022/02.png" width="161px">
 </a>
+<a href="2022/03/Python/main.py">
+  <img src=".aoc_tiles/tiles/2022/03.png" width="161px">
+</a>
 <!-- AOC TILES END -->
-
-# AdventOfCode 2023
-My first AoC.
-Python at least, if time allows it will try to solve challenge in C as well.
