@@ -6,6 +6,7 @@ def main(input_file, stage):
         instructions = file.readlines()
         instruction_cycles = {"addx": 2, "noop": 1}
         x, cycle, signal_strengths, screen = 1, 0, 0, [[], [], [], [], [], []]
+        
         # alternative approach
         # add one noop for each addx to be able to have addx in one cycle
         if False:
