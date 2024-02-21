@@ -78,7 +78,7 @@
   <img src=".aoc_tiles/tiles/2023/25.png" width="161px">
 </a>
 <h1 align="center">
-  2022 - 20 ⭐
+  2022 - 28 ⭐
 </h1>
 <a href="2022/01/Python/main.py">
   <img src=".aoc_tiles/tiles/2022/01.png" width="161px">
@@ -109,5 +109,17 @@
 </a>
 <a href="2022/10/Python/main.py">
   <img src=".aoc_tiles/tiles/2022/10.png" width="161px">
+</a>
+<a href="2022/11/Python/main.py">
+  <img src=".aoc_tiles/tiles/2022/11.png" width="161px">
+</a>
+<a href="2022/12/Python/main.py">
+  <img src=".aoc_tiles/tiles/2022/12.png" width="161px">
+</a>
+<a href="2022/13/Python/main.py">
+  <img src=".aoc_tiles/tiles/2022/13.png" width="161px">
+</a>
+<a href="2022/14/Python/main.py">
+  <img src=".aoc_tiles/tiles/2022/14.png" width="161px">
 </a>
 <!-- AOC TILES END -->
