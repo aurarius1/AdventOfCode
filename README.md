@@ -155,4 +155,13 @@
 <a href="2022/25/Python/main.py">
   <img src=".aoc_tiles/tiles/2022/25.png" width="161px">
 </a>
+<h1 align="center">
+  2021 - 4 ⭐
+</h1>
+<a href="2021/01/C++/main.cpp">
+  <img src=".aoc_tiles/tiles/2021/01.png" width="161px">
+</a>
+<a href="2021/02/C++/main.cpp">
+  <img src=".aoc_tiles/tiles/2021/02.png" width="161px">
+</a>
 <!-- AOC TILES END -->
