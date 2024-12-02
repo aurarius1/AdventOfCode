@@ -25,8 +25,8 @@ public abstract class Base
         get { return Path.Combine(ClassPath, "input"); }
     }
     
-    public abstract string PartOne(bool example);
-    public abstract string PartTwo(bool example);
+    public abstract object PartOne(bool example);
+    public abstract object PartTwo(bool example);
 
     protected virtual string[] ReadInput(bool example)
     {
@@ -60,7 +60,7 @@ public static class BaseExtensions
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
-        string solution;
+        object solution;
         switch (stage)
         {
             case Stages.One: 

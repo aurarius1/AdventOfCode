@@ -22,6 +22,5 @@ public static class ListExtensions
 
         return minIndex;
     }
-    
-    
+
 }

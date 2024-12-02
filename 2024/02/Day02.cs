@@ -42,7 +42,7 @@ public class Day02 : Base
         return 1;
     }
     
-    public override string PartOne(bool example)
+    public override object PartOne(bool example)
     {
         string[] input = ReadInput(example);
         int safeReadings = 0;
@@ -51,17 +51,17 @@ public class Day02 : Base
             ParseLine(line, out var readings);
             safeReadings += ReportSafe(readings);
         }
-        return safeReadings.ToString();
+        return safeReadings;
     }
 
-    public override string PartTwo(bool example)
+    public override object PartTwo(bool example)
     {
         string[] input = ReadInput(example);
         int safeReadings = 0;
         foreach(var line in input)
         {
             ParseLine(line, out var readings);
-            for(int i = 0; i < readings.Count; i++) {
+            foreach(var (_, i) in readings.Enumerate()){
                 List<int> tmp = readings.Where((_, idx) => idx != i).ToList();
                 if (ReportSafe(tmp) == 1)
                 {
@@ -70,6 +70,6 @@ public class Day02 : Base
                 }
             }
         }
-        return safeReadings.ToString();
+        return safeReadings;
     }
 }

@@ -36,7 +36,7 @@ public sealed class Day01 : Base
         }
     }
     
-    public override string PartOne(bool example)
+    public override object PartOne(bool example)
     {
         string[] input = ReadInput(example);
         ParseInput(input, out List<int> firstIdList, out List<int> secondIdList);
@@ -55,7 +55,7 @@ public sealed class Day01 : Base
         return distances.ToString();
     }
 
-    public override string PartTwo(bool example)
+    public override object PartTwo(bool example)
     {
         string[] input = ReadInput(example);
         ParseInput(input, out List<int> firstIdList, out List<int> secondIdList);
