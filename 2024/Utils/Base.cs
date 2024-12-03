@@ -4,7 +4,12 @@ using System.Diagnostics;
 
 public abstract class Base
 {
-    protected string Day { get; init; } = string.Empty;
+    private string _day = "";
+    protected string Day
+    {
+        get { return _day;}
+        init { _day = value.PadLeft(2, '0'); } 
+    }
 
     protected string ClassPath
     {
