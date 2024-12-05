@@ -174,7 +174,7 @@
   <img src=".aoc_tiles/tiles/2022/25.png" width="161px">
 </a>
 <h1 align="center">
-  2021 - 8 ⭐
+  2021 - 10 ⭐
 </h1>
 <a href="2021/01/C++/main.cpp">
   <img src=".aoc_tiles/tiles/2021/01.png" width="161px">
@@ -187,5 +187,8 @@
 </a>
 <a href="2021/04/C++/main.cpp">
   <img src=".aoc_tiles/tiles/2021/04.png" width="161px">
+</a>
+<a href="2021/05/C++/main.cpp">
+  <img src=".aoc_tiles/tiles/2021/05.png" width="161px">
 </a>
 <!-- AOC TILES END -->
