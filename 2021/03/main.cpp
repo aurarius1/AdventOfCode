@@ -1,6 +1,6 @@
 #include <iostream>
 #include <chrono>
-#include "utils.h"
+#include "../Utils/utils.h"
 
 struct BitCounter {
     int zero = 0;

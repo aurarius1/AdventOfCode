@@ -1,8 +1,8 @@
 #include <iostream>
 #include <chrono>
 #include <regex>
-#include "utils.h"
-#include "Vector.h"
+#include "../Utils/utils.h"
+#include "../Utils/Vector.h"
 
 using aoc_utils::Vector;
 

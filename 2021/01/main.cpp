@@ -1,6 +1,6 @@
 #include <iostream>
 #include <chrono>
-#include "utils.h"
+#include "../Utils/utils.h"
 
 void stage1(const std::vector<std::string>& puzzle){
     int increased = 0;

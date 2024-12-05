@@ -174,21 +174,30 @@
   <img src=".aoc_tiles/tiles/2022/25.png" width="161px">
 </a>
 <h1 align="center">
-  2021 - 10 ⭐
+  2021 - 16 ⭐
 </h1>
-<a href="2021/01/C++/main.cpp">
+<a href="2021/01/main.cpp">
   <img src=".aoc_tiles/tiles/2021/01.png" width="161px">
 </a>
-<a href="2021/02/C++/main.cpp">
+<a href="2021/02/main.cpp">
   <img src=".aoc_tiles/tiles/2021/02.png" width="161px">
 </a>
-<a href="2021/03/C++/main.cpp">
+<a href="2021/03/main.cpp">
   <img src=".aoc_tiles/tiles/2021/03.png" width="161px">
 </a>
-<a href="2021/04/C++/main.cpp">
+<a href="2021/04/main.cpp">
   <img src=".aoc_tiles/tiles/2021/04.png" width="161px">
 </a>
-<a href="2021/05/C++/main.cpp">
+<a href="2021/05/main.cpp">
   <img src=".aoc_tiles/tiles/2021/05.png" width="161px">
+</a>
+<a href="2021/06/main.cpp">
+  <img src=".aoc_tiles/tiles/2021/06.png" width="161px">
+</a>
+<a href="2021/07/main.cpp">
+  <img src=".aoc_tiles/tiles/2021/07.png" width="161px">
+</a>
+<a href="2021/08/main.cpp">
+  <img src=".aoc_tiles/tiles/2021/08.png" width="161px">
 </a>
 <!-- AOC TILES END -->

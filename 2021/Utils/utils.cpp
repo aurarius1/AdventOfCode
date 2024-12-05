@@ -33,6 +33,7 @@ namespace aoc_utils{
     }
     template void splitString<std::string>(const std::string& toSplit, char delim, std::vector<std::string>& out);
     template void splitString<int>(const std::string& toSplit, char delim, std::vector<int>& out);
+    template void splitString<size_t>(const std::string& toSplit, char delim, std::vector<size_t>& out);
 
 
 

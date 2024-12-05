@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(DAYS 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25)
 
 # Include the Utils folder
-set(UTILS_DIR ${CMAKE_SOURCE_DIR}/Utils/C++)
+set(UTILS_DIR ${CMAKE_SOURCE_DIR}/Utils)
 include_directories(${UTILS_DIR})
 
 # Add the utils.cpp file to a shared library
@@ -18,7 +18,7 @@ add_library(Utils
 # Loop through all days and add a target for each
 foreach(DAY IN LISTS DAYS)
     # Set the source directory for the current day
-    set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/${DAY}/C++)
+    set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/${DAY})
 
     # Check if the main.cpp file exists for the day
     if(EXISTS ${SOURCE_DIR}/main.cpp)

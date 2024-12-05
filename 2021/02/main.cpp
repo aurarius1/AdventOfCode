@@ -1,6 +1,6 @@
 #include <iostream>
 #include <chrono>
-#include "utils.h"
+#include "../Utils/utils.h"
 
 void stage(const std::vector<std::string>& puzzle, int stage = 1){
     int horizontal = 0, depth = 0, aim = 0;
