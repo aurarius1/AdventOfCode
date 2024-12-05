@@ -10,7 +10,10 @@ set(UTILS_DIR ${CMAKE_SOURCE_DIR}/Utils/C++)
 include_directories(${UTILS_DIR})
 
 # Add the utils.cpp file to a shared library
-add_library(Utils ${UTILS_DIR}/utils.cpp)
+add_library(Utils
+        ${UTILS_DIR}/utils.cpp
+        ${UTILS_DIR}/Vector.cpp
+)
 
 # Loop through all days and add a target for each
 foreach(DAY IN LISTS DAYS)

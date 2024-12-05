@@ -2,47 +2,11 @@
 #include <chrono>
 #include <regex>
 #include "utils.h"
+#include "Vector.h"
 
-struct Vector{
-    int x = 0;
-    int y = 0;
+using aoc_utils::Vector;
 
-    explicit Vector(const std::string& coordinate){
-        std::stringstream coordinateStream(std::regex_replace(coordinate, std::regex(","), " "));
-        coordinateStream >> x >> y;
-    }
 
-    Vector(int p_x, int p_y) : x(p_x), y(p_y) {
-
-    }
-
-    bool operator!=(const Vector& other) const {
-        return x != other.x || y != other.y;
-    }
-
-    Vector& operator+=(const Vector& other) {
-        x += other.x;
-        y += other.y;
-        return *this;
-    }
-
-    void normalize(){
-        if(this->x != 0){
-            this->x = this->x / (std::abs(this->x));
-        }
-
-        if(this->y != 0){
-            this->y = this->y / (std::abs(this->y));
-        }
-    }
-
-    friend std::ostream& operator<<(std::ostream& os, const Vector& position);
-};
-
-std::ostream &operator<<(std::ostream &os, const Vector &position) {
-    os << "(" << position.x << "," << position.y << ")";
-    return os;
-}
 
 struct HydrothermalVent{
     Vector start, end;
