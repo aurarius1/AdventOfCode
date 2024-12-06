@@ -21,4 +21,9 @@ namespace aoc_utils {
         os << "(" << position.x << "," << position.y << ")";
         return os;
     }
+
+    std::string Vector::id() {
+        return std::to_string(y) + std::to_string(x);
+    }
+
 }
