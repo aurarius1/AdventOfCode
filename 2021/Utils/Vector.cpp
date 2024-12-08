@@ -22,8 +22,9 @@ namespace aoc_utils {
         return os;
     }
 
-    std::string Vector::id() {
+    std::string Vector::id() const {
         return std::to_string(y) + std::to_string(x);
     }
+
 
 }

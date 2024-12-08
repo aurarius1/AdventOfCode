@@ -36,9 +36,13 @@ namespace aoc_utils{
             return *this;
         }
 
+        Vector operator +(const Vector& other) const{
+            return {x + other.x, y + other.y};
+        }
+
         void normalize();
 
-        std::string id();
+        [[nodiscard]] std::string id() const;
 
         friend std::ostream& operator<<(std::ostream& os, const Vector& position);
     };
