@@ -18,6 +18,13 @@ public class Day10 : Base
     
     private int[][] Map { get; set; }
     private HashSet<ValueTuple<int, int>> TrailEnds = [];
+    private readonly ValueTuple<int, int>[] Directions =
+    [
+        (0, 1),
+        (0, -1),
+        (1, 0),
+        (-1, 0)
+    ];
     
     private void PrintMap(){
         foreach ((int[] line, int row) in Map.Enumerate())
@@ -43,17 +50,9 @@ public class Day10 : Base
             TrailEnds.Add(position);
             return 1;
         }
-
-        ValueTuple<int, int>[] directions =
-        [
-            (0, 1),
-            (0, -1),
-            (1, 0),
-            (-1, 0)
-        ];
-
+        
         int paths = 0;
-        foreach ((int row, int col) in directions)
+        foreach ((int row, int col) in Directions)
         {
             ValueTuple<int, int> newPosition = (position.Item1+row, position.Item2+col);
 
