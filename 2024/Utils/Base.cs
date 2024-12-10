@@ -79,7 +79,7 @@ public static class BaseExtensions
         }
         stopwatch.Stop();
         double seconds = stopwatch.Elapsed.TotalSeconds;
-        Console.WriteLine($"Stage {stage}: {solution} took {seconds:F2}");
+        Console.WriteLine($"Stage {stage}: {solution} took {seconds:F2}s ({stopwatch.Elapsed.Milliseconds}ms)");
     }
     
 }
