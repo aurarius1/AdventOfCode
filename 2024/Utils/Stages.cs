@@ -2,7 +2,6 @@
 
 public enum Stages
 {
-    All = 0,
     One = 1,
     Two = 2
 }

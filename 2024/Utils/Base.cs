@@ -59,33 +59,30 @@ public abstract class Base
 
 public static class BaseExtensions
 {
-    public static void Solve(this Base problem, bool example, Stages stage = Stages.All)
+    public static void Solve(this Base problem, bool example, List<Stages> stages)
     {
-        if (stage == Stages.All)
+        List<ValueTuple<Stages, string, double, long>> results = [];
+        int maxLength = 0;
+        foreach (Stages stage in stages)
         {
-            problem.Solve(example, Stages.One);
-            problem.Reset();
-            problem.Solve(example, Stages.Two);
-            return;
+            Stopwatch stopwatch = new();
+            stopwatch.Start();
+            string solution = stage switch
+            {
+                Stages.One => problem.PartOne(example).ToString() ?? "",
+                Stages.Two => problem.PartTwo(example).ToString() ?? "",
+                _ => throw new Exception($"Unknown stage {stage}")
+            };
+            stopwatch.Stop();
+            results.Add((stage, solution, stopwatch.Elapsed.TotalSeconds, stopwatch.ElapsedMilliseconds));
+            maxLength = Math.Max(maxLength, results[^1].Item2.Length);
+            
         }
-
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
-        object solution;
-        switch (stage)
+        foreach ((Stages stage, string solution, double seconds, long milliSeconds) in results)
         {
-            case Stages.One: 
-                solution = problem.PartOne(example);
-                break;
-            case Stages.Two:
-                solution = problem.PartTwo(example);
-                break;
-            default: 
-                throw new Exception($"Unknown stage {stage}");
+            Console.WriteLine($"Stage {stage}: {solution.PadLeft(maxLength, ' ')} " +
+                              $"took {seconds:F2}s ({milliSeconds,4}ms)");
         }
-        stopwatch.Stop();
-        double seconds = stopwatch.Elapsed.TotalSeconds;
-        Console.WriteLine($"Stage {stage}: {solution} took {seconds:F2}s ({stopwatch.Elapsed.Milliseconds}ms)");
     }
     
 }

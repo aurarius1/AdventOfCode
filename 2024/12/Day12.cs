@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Immutable;
 using System.Linq.Expressions;
@@ -17,6 +17,8 @@ public class Day12 : Base
     private string[] _input = [];
     private readonly HashSet<ValueTuple<int, int>> _areaPositions = [];
 
+    // theoretically it is possible to count the perimeter for part1 here as well (just count in the forloop before 
+    // continue)
     private void FindArea(int row, int col, char soil, HashSet<ValueTuple<int, int>> visited)
     {
         if (!visited.Add((row, col)))

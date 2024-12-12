@@ -4,11 +4,11 @@ namespace _2024
 {
     class Program
     {
-        static void ParseArguments(string[] args, out Stages stage, out bool example, out string day)
+        static void ParseArguments(string[] args, out List<Stages> stages, out bool example, out string day)
         {
             day = args[0].PadLeft(2, '0'); // Ensure the day number is two digits, e.g., "01"
             example = false;
-            stage = Stages.All;
+            stages = [Stages.One, Stages.Two];
             bool part1 = false, part2 = false;
             
             foreach(string arg in args.Skip(1))
@@ -17,24 +17,14 @@ namespace _2024
                 part2 |= arg == "--part2";
                 part1 |= arg == "--part1";
             }
-            
-            // executing all is default
-            if ((!part1 && !part2) || (part1 && part2))
-            {
-                return;
-            }
 
-            if (part1)
+            if (!part1 && !part2)
             {
-                stage = Stages.One;
                 return;
             }
-
-            if (part2)
-            {
-                stage = Stages.Two;
-                return;
-            }
+            stages = stages.Where(stage => 
+                (part1 || stage != Stages.One) && 
+                (part2 || stage != Stages.Two)).ToList();
         }
         
         
@@ -46,7 +36,7 @@ namespace _2024
                 Console.WriteLine("Please provide the day number as an argument (e.g., 01 for Day01).");
                 System.Environment.Exit(-1);
             }
-            ParseArguments(args, out Stages stage, out bool example, out string dayNumber);
+            ParseArguments(args, out List<Stages> stages, out bool example, out string dayNumber);
 
             var className = $"_2024._{dayNumber}.Day{dayNumber}";
             Type? dayType = null;
@@ -73,7 +63,7 @@ namespace _2024
                 System.Environment.Exit(-1);
             }
 
-            day.Solve(example, stage);
+            day.Solve(example, stages);
         }
     }
 }
