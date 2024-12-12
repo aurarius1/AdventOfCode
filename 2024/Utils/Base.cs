@@ -33,6 +33,11 @@ public abstract class Base
     public abstract object PartOne(bool example);
     public abstract object PartTwo(bool example);
 
+    public virtual void Reset()
+    {
+        
+    }
+    
     protected virtual string[] ReadInput(bool example)
     {
         string path = RealData;
@@ -59,6 +64,7 @@ public static class BaseExtensions
         if (stage == Stages.All)
         {
             problem.Solve(example, Stages.One);
+            problem.Reset();
             problem.Solve(example, Stages.Two);
             return;
         }

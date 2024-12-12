@@ -32,7 +32,7 @@ public class Day11 : Base
     private static ulong SolvePuzzle(string input, int stage)
     {
         Dictionary<ulong, ulong> stones = input.Split(' ').Select(ulong.Parse)
-            .GroupBy(num => num) // Group by each unique number
+            .GroupBy(num => num) 
             .ToDictionary(g => g.Key, g => (ulong)g.Count());
         
         for (int i = 0; i < ((stage == 1) ? (25) : (75)); i++)
@@ -73,8 +73,7 @@ public class Day11 : Base
         string[] input = ReadInput(example);
         return SolvePuzzle(input[0], 1);
     }
-    
-    // this technically runs faster, but the linked list solution looks better and works as well 
+
     public override object PartTwo(bool example)
     {
         string[] input = ReadInput(example);
