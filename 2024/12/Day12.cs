@@ -62,7 +62,6 @@ public class Day12 : Base
                     {
                         perimeter++;
                     }
-                    
                     continue;
                 }
 
@@ -95,7 +94,7 @@ public class Day12 : Base
             // a    bb   cc    c
             // any of those would signal one corner
             foreach((int dRow, int dCol) in new [] {(-1, 1), (-1, -1), (1, 1), (1, -1)}){
-                 int newRow = row + dRow, newCol = col + dCol;
+                int newRow = row + dRow, newCol = col + dCol;
                 
                 // this is not a valid corner
                 if (_input.IsOob((newRow, newCol)) || _input[row][newCol] != soil || _input[newRow][col] != soil)
