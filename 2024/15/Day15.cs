@@ -46,7 +46,7 @@ public class Day15 : Base
 
             if (stage == 1)
             {
-                map.Add(line.ToCharArray());
+                map.Add(line.Replace('@', '.').ToCharArray());
                 if (line.Contains('@'))
                 {
                     robot = (row, line.IndexOf('@'));
@@ -78,34 +78,7 @@ public class Day15 : Base
             }
         }
     }
-
-
-    private static bool TryMove(
-        List<char[]> map, 
-        ValueTuple<int, int> robot, 
-        ValueTuple<int, int> direction, 
-        int stage,
-        out int steps
-        )
-    {
-        steps = 1;
-
-        char[] boxCharacters = stage == 1 ? ['O'] : [']', '['];
-        
-        while (boxCharacters.Contains(map[robot.Item1 + direction.Item1 * steps][robot.Item2 + direction.Item2 * steps]))
-        {
-            steps++;
-        }
-            
-        // robot cant move, obstacles in this direction
-        if (map[robot.Item1 + direction.Item1 * steps][robot.Item2 + direction.Item2 * steps] != '#')
-        {
-            return true;
-        };
-        steps = -1;
-        return false;
-    }
-
+    
     private static int GetCoordinates(List<char[]> map, char boxCharacter = 'O')
     {
         int gpsCoordinates = 0;
@@ -121,157 +94,134 @@ public class Day15 : Base
         }
         return gpsCoordinates;
     }
-    
-    private static int PerformInstructions(List<char[]> map, List<char> instructions, ValueTuple<int, int> robot)
+
+    private static int PerformInstructions(List<char[]> map, List<char> instructions, ValueTuple<int, int> robot, int stage)
     {
-        foreach(char instruction in instructions)
+        foreach(char currInstruction in instructions)
         {
-            ValueTuple<int, int> direction = instruction switch
+            bool movePossible;
+            HashSet<ValueTuple<int, int, char>> movedBoxes;
+            ValueTuple<int, int> direction;
+            switch (currInstruction)
             {
-                '<' => (0, -1),
-                '>' => (0, 1),
-                'v' => (1, 0),
-                '^' => (-1, 0),
-                _ => (0, 0)
-            };
-
-            switch (map[robot.Item1 + direction.Item1][robot.Item2 + direction.Item2])
-            {
-                case '#':
-                    continue;
-                case '.':
-                    robot = (robot.Item1 + direction.Item1, robot.Item2 + direction.Item2);
-                    continue;
+                case '^':
+                    direction = (-1, 0);
+                    movePossible = TryMoveVertical(map, robot, direction, out movedBoxes, stage);
+                    break;
+                case 'v':
+                    direction = (1, 0);
+                    movePossible = TryMoveVertical(map, robot, direction, out movedBoxes, stage);
+                    break;
+                case '>':
+                    direction = (0, 1);
+                    movePossible = TryMoveHorizontal(map, robot, direction, out movedBoxes);
+                    break;
+                case '<':
+                    direction = (0, -1);
+                    movePossible = TryMoveHorizontal(map, robot, direction, out movedBoxes);
+                    break;
+                default:
+                    throw new InputInvalidException($"Invalid instruction: {currInstruction}");
+                    
             }
-
-            if (!TryMove(map, robot, direction, 1, out int steps))
+            
+            if (!movePossible)
             {
                 continue;
             }
-            while (steps > 0)
+            foreach ((int, int, char) box in movedBoxes)
             {
-                map[robot.Item1 + direction.Item1 * steps][robot.Item2 + direction.Item2 * steps] = 'O';
-                steps--;
+                map[box.Item1][box.Item2] = '.';
+            }
+            foreach ((int, int, char) box in movedBoxes)
+            {
+                map[box.Item1+direction.Item1][box.Item2+direction.Item2] = box.Item3;
             }
             robot = (robot.Item1 + direction.Item1, robot.Item2 + direction.Item2);
-            // this is the field the robot would be at
-            map[robot.Item1][robot.Item2] = '.';
         }
-        return GetCoordinates(map, 'O');
+        return GetCoordinates(map, stage == 1 ? 'O' : '[');
+    }
+    
+    private static bool TryMoveVertical(
+        List<char[]> map, 
+        ValueTuple<int, int> start, 
+        ValueTuple<int, int> direction, 
+        out HashSet<ValueTuple<int, int, char>> movedBoxes,
+        int stage
+    )
+    {
+        Queue<ValueTuple<int, int>> queue = new();
+        movedBoxes = [];
+        queue.Enqueue((start.Item1+direction.Item1, start.Item2+direction.Item2));
+        while (queue.TryDequeue(out ValueTuple<int, int> box))
+        {
+            switch (map[box.Item1][box.Item2])
+            {
+                case '#':
+                    movedBoxes.Clear();
+                    return false;
+                case '.':
+                    continue;
+            }
+            if(!movedBoxes.Add((box.Item1, box.Item2, map[box.Item1][box.Item2])))
+            { 
+                continue;
+            }
+            if (stage == 2)
+            {
+                queue.Enqueue((box.Item1, box.Item2 + (map[box.Item1][box.Item2] == ']' ? -1 : 1)));   
+            }
+            queue.Enqueue((box.Item1+direction.Item1, box.Item2+direction.Item2));
+        }
+        return true;
+    }
+
+    // vertical movement can always be handled the same for both parts 
+    // because the original character is stored, and we just move everything one to the left, we just need to check 
+    // if there is a space at the end, the exact arrangement of boxes doesn't matter
+    // the additional stage parameter is just to be able to reuse the same delegate method template
+    private static bool TryMoveHorizontal(
+        List<char[]> map,
+        ValueTuple<int, int> start,
+        ValueTuple<int, int> direction,
+        out HashSet<ValueTuple<int, int, char>> movedBoxes
+    )
+    {
+        Queue<ValueTuple<int, int>> queue = new();
+        movedBoxes = [];
+        queue.Enqueue((start.Item1+direction.Item1, start.Item2+direction.Item2));
+        while (queue.TryDequeue(out ValueTuple<int, int> box))
+        {
+            switch (map[box.Item1][box.Item2])
+            {
+                case '#':
+                    movedBoxes.Clear();
+                    return false;
+                case '.':
+                    continue;
+            }
+            if(!movedBoxes.Add((box.Item1, box.Item2, map[box.Item1][box.Item2])))
+            { 
+                continue;
+            }
+            ValueTuple<int, int> next = (box.Item1+direction.Item1, box.Item2+direction.Item2);
+            queue.Enqueue(next);
+        }
+        return true;
     }
     
     public override object PartOne(bool example)
     {
         string[] input = ReadInput(example);
         ParseInput(input, out List<char[]> map, out List<char> instructions, out ValueTuple<int, int> robot, 1);
-        return PerformInstructions(map, instructions, robot);
+        return PerformInstructions(map, instructions, robot, 1);
     }
 
-
-    private static int TestMoveHorizontal(
-        List<char[]> map, 
-        ValueTuple<int, int> start, 
-        ValueTuple<int, int> direction, 
-        Dictionary<int, List<ValueTuple<int, int, char>>> movedBoxes
-    )
-    {
-        ValueTuple<int, int> box1 = (start.Item1+direction.Item1, start.Item2+direction.Item2);
-        switch (map[box1.Item1][box1.Item2])
-        {
-            case '#':
-                return -1;
-            case '.':
-                return 1;
-        }
-        ValueTuple<int, int> box2 = (box1.Item1, box1.Item2 + (map[box1.Item1][box1.Item2] == ']' ? -1 : 1));
-        int left = TestMoveHorizontal(map, box1, direction, movedBoxes);
-        int right = TestMoveHorizontal(map, box2, direction, movedBoxes);
-
-        if (left == -1 || right == -1)
-        {
-            return -1;
-        };
-        movedBoxes.TryAdd(box1.Item1, []);
-        movedBoxes[box1.Item1].Add((box1.Item1, box1.Item2, map[box1.Item1][box1.Item2]));
-        movedBoxes[box2.Item1].Add((box2.Item1, box2.Item2, map[box2.Item1][box2.Item2]));
-        return 1+left;
-
-    }
-
-    
     public override object PartTwo(bool example)
     {
         string[] input = ReadInput(example);
         ParseInput(input, out List<char[]> map, out List<char> instructions, out ValueTuple<int, int> robot, 2);
-
-        foreach((char instruction, int cnt) in instructions.Enumerate())
-        {
-            ValueTuple<int, int> direction = instruction switch
-            {
-                '<' => (0, -1),
-                '>' => (0, 1),
-                'v' => (1, 0),
-                '^' => (-1, 0),
-                _ => (0, 0)
-            };
-
-            switch (map[robot.Item1 + direction.Item1][robot.Item2 + direction.Item2])
-            {
-                case '#':
-                    continue;
-                case '.':
-                    robot = (robot.Item1 + direction.Item1, robot.Item2 + direction.Item2);
-                    continue;
-            }
-
-            int steps = 0;
-            if (direction == (-1, 0) || direction == (1, 0))
-            {
-                Dictionary<int, List<ValueTuple<int, int, char>>> movedBoxes = new();
-                steps = TestMoveHorizontal(map, robot, direction, movedBoxes);
-                if (steps == -1)
-                {
-                    continue;
-                }
-                foreach ((int, int, char) box in movedBoxes.Values.SelectMany(boxes => boxes))
-                {
-                    map[box.Item1][box.Item2] = '.';
-                }
-                foreach ((int, int, char) box in movedBoxes.Values.SelectMany(boxes => boxes))
-                {
-                    map[box.Item1+direction.Item1][box.Item2] = box.Item3;
-                }
-                robot = (robot.Item1 + direction.Item1, robot.Item2 + direction.Item2);
-                continue;
-            }
-            
-            
-            
-            steps = 1;
-            while (map[robot.Item1 + direction.Item1 * steps][robot.Item2 + direction.Item2 * steps] == ']' || 
-                   map[robot.Item1 + direction.Item1 * steps][robot.Item2 + direction.Item2 * steps] == '[')
-            {
-                steps += 2;
-            }
-            //robot cant move obstacles in this direction
-            if (map[robot.Item1 + direction.Item1 * steps][robot.Item2 + direction.Item2 * steps] == '#')
-            {
-                continue;
-            }
-           
-            while (steps > 1)
-            {
-                map[robot.Item1 + direction.Item1 * steps][robot.Item2 + direction.Item2 * steps] = map[robot.Item1 + direction.Item1 *
-                    (steps-1)][robot.Item2 + direction.Item2 * (steps-1)];
-                steps--;
-                map[robot.Item1 + direction.Item1 * steps][robot.Item2 + direction.Item2 * steps] = map[robot.Item1 + direction.Item1 *
-                    (steps-1)][robot.Item2 + direction.Item2 * (steps-1)];
-                steps--;
-            }
-            robot = (robot.Item1 + direction.Item1, robot.Item2 + direction.Item2);
-            map[robot.Item1][robot.Item2] = '.';
-        }
-        return GetCoordinates(map, '[');
+        return PerformInstructions(map, instructions, robot, 2);
     }
 
 
