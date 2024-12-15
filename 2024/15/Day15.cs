@@ -99,33 +99,15 @@ public class Day15 : Base
     {
         foreach(char currInstruction in instructions)
         {
-            bool movePossible;
-            HashSet<ValueTuple<int, int, char>> movedBoxes;
-            ValueTuple<int, int> direction;
-            switch (currInstruction)
+            ValueTuple<int, int> direction = currInstruction switch
             {
-                case '^':
-                    direction = (-1, 0);
-                    movePossible = TryMoveVertical(map, robot, direction, out movedBoxes, stage);
-                    break;
-                case 'v':
-                    direction = (1, 0);
-                    movePossible = TryMoveVertical(map, robot, direction, out movedBoxes, stage);
-                    break;
-                case '>':
-                    direction = (0, 1);
-                    movePossible = TryMoveHorizontal(map, robot, direction, out movedBoxes);
-                    break;
-                case '<':
-                    direction = (0, -1);
-                    movePossible = TryMoveHorizontal(map, robot, direction, out movedBoxes);
-                    break;
-                default:
-                    throw new InputInvalidException($"Invalid instruction: {currInstruction}");
-                    
-            }
-            
-            if (!movePossible)
+                '^' => (-1, 0),
+                'v' => (1, 0),
+                '>' => (0, 1),
+                '<' => (0, -1),
+                _ => throw new InputInvalidException($"Invalid instruction: {currInstruction}")
+            };
+            if (!TryMove(map, robot, direction, out HashSet<ValueTuple<int, int, char>> movedBoxes, stage))
             {
                 continue;
             }
@@ -142,7 +124,7 @@ public class Day15 : Base
         return GetCoordinates(map, stage == 1 ? 'O' : '[');
     }
     
-    private static bool TryMoveVertical(
+    private static bool TryMove(
         List<char[]> map, 
         ValueTuple<int, int> start, 
         ValueTuple<int, int> direction, 
@@ -172,40 +154,6 @@ public class Day15 : Base
                 queue.Enqueue((box.Item1, box.Item2 + (map[box.Item1][box.Item2] == ']' ? -1 : 1)));   
             }
             queue.Enqueue((box.Item1+direction.Item1, box.Item2+direction.Item2));
-        }
-        return true;
-    }
-
-    // vertical movement can always be handled the same for both parts 
-    // because the original character is stored, and we just move everything one to the left, we just need to check 
-    // if there is a space at the end, the exact arrangement of boxes doesn't matter
-    // the additional stage parameter is just to be able to reuse the same delegate method template
-    private static bool TryMoveHorizontal(
-        List<char[]> map,
-        ValueTuple<int, int> start,
-        ValueTuple<int, int> direction,
-        out HashSet<ValueTuple<int, int, char>> movedBoxes
-    )
-    {
-        Queue<ValueTuple<int, int>> queue = new();
-        movedBoxes = [];
-        queue.Enqueue((start.Item1+direction.Item1, start.Item2+direction.Item2));
-        while (queue.TryDequeue(out ValueTuple<int, int> box))
-        {
-            switch (map[box.Item1][box.Item2])
-            {
-                case '#':
-                    movedBoxes.Clear();
-                    return false;
-                case '.':
-                    continue;
-            }
-            if(!movedBoxes.Add((box.Item1, box.Item2, map[box.Item1][box.Item2])))
-            { 
-                continue;
-            }
-            ValueTuple<int, int> next = (box.Item1+direction.Item1, box.Item2+direction.Item2);
-            queue.Enqueue(next);
         }
         return true;
     }
