@@ -1,6 +1,8 @@
 ﻿namespace _2024.Utils;
 
-public class MathExtensions
+public static class MathExtensions
 {
-    public static int Mod(int a, int n) => (a % n + n) % n;
+    public static int Modulo(int a, int n) => (a % n + n) % n;
+    
+    public static long Modulo (long a, long n) => (a % n + n) % n;
 }

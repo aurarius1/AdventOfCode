@@ -65,7 +65,7 @@ public class Day16 : Base
             
             for (int direction = -1; direction < 2; direction += 2)
             {
-                queue.Enqueue((curr.Item1, MathExtensions.Mod(curr.Item2 + direction, _directions.Length)), priority + 1000);
+                queue.Enqueue((curr.Item1, MathExtensions.Modulo(curr.Item2 + direction, _directions.Length)), priority + 1000);
             }
             // dont turn, move forward to currently facing direction
             ValueTuple<int, int> facing = _directions[curr.Item2];
@@ -130,7 +130,7 @@ public class Day16 : Base
             HashSet<ValueTuple<int, int>> newHistory = [..curr.Item3, curr.Item1];
             for (int direction = -1; direction < 2; direction++)
             {
-                int newDir = MathExtensions.Mod(curr.Item2 + direction, _directions.Length);
+                int newDir = MathExtensions.Modulo(curr.Item2 + direction, _directions.Length);
                 ValueTuple<int, int> dir = _directions[newDir];
                 ValueTuple<int, int> newPos = (curr.Item1.Item1 + dir.Item1, curr.Item1.Item2 + dir.Item2);
                 

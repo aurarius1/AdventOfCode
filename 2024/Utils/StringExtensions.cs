@@ -22,6 +22,9 @@ public static class StringExtensions
         value = input[position.Item1][position.Item2];
         return true;
     }
+    
+
+    
 
     /// <summary>
     /// Does out of bounds checks on the given <paramref name="input"/>. 
@@ -34,4 +37,6 @@ public static class StringExtensions
         return (position.Item1 < 0 || position.Item1 >= input.Length || position.Item2 < 0 ||
                 position.Item2 >= input[position.Item1].Length);
     }
+    
+
 }
