@@ -76,7 +76,8 @@ public static class BaseExtensions
             stopwatch.Stop();
             results.Add((stage, solution, stopwatch.Elapsed.TotalSeconds, stopwatch.ElapsedMilliseconds));
             maxLength = Math.Max(maxLength, results[^1].Item2.Length);
-            
+            problem.Reset();
+
         }
         foreach ((Stages stage, string solution, double seconds, long milliSeconds) in results)
         {
