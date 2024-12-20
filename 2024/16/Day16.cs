@@ -19,7 +19,7 @@ public struct Box
 
 public class Day16 : Base
 {
-    public Day16()
+    public Day16(bool example) : base(example) 
     {
         Day = "16";
     }
@@ -155,15 +155,15 @@ public class Day16 : Base
     }
     
 
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         return FindLowestScore(input);
     }
 
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         return FindNumberOfSeats(input);
     }
 

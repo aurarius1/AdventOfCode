@@ -25,7 +25,7 @@ public struct Robot(ValueTuple<int, int> position, ValueTuple<int, int> velocity
 
 public class Day14 : Base
 {
-    public Day14()
+    public Day14(bool example) : base(example) 
     {
         Day = "14";
     }
@@ -52,9 +52,9 @@ public class Day14 : Base
         return (ySize+1, xSize+1);
     }
 
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         
         (int ySize, int xSize) = ParseInput(input, out List<Robot> robots);
         int[] quadrants = [0, 0, 0, 0];
@@ -73,9 +73,9 @@ public class Day14 : Base
         return quadrants.Aggregate(1, (acc, robotCount) => acc * robotCount);
     }
 
-    public override object PartTwo(bool example)
+    private void PartTwoDrawPictures()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         (int ySize, int xSize) = ParseInput(input, out List<Robot> robots);
         string bmpPath = Path.Combine(ClassPath, "bmps");
         Directory.CreateDirectory(bmpPath);
@@ -96,8 +96,39 @@ public class Day14 : Base
             
             image1.Save(Path.Combine(bmpPath, $"{step}.bmp"));
         }
+    }
+    
+    public override object PartTwo()
+    {
+        string[] input = ReadInput();
         
-        return 0;
+        (int ySize, int xSize) = ParseInput(input, out List<Robot> robots);
+        int minSecurityValue = int.MaxValue;
+        int minSecurityValueStep = 0;
+        for (int step = 1; step <= ySize * xSize; step++)
+        {
+            int[] quadrants = [0, 0, 0, 0];
+            foreach ((int, int) newPosition in robots.Select(robot => robot.Move(step, ySize, xSize)))
+            {
+                int xQuadrant = newPosition.Item1 < (ySize - 1) / 2 ? 0 : 1;
+                int yQuadrant = newPosition.Item2 < (xSize - 1) / 2 ? 0 : 2;
+
+                if (newPosition.Item1 == (ySize - 1) / 2 || newPosition.Item2 == (xSize - 1) / 2)
+                {
+                    continue;
+                }
+                quadrants[xQuadrant+yQuadrant]++;
+            }
+
+            int securityValue = quadrants.Aggregate(1, (acc, robotCount) => acc * robotCount);
+            if (securityValue < minSecurityValue)
+            {
+                minSecurityValue = securityValue;
+                minSecurityValueStep = step;
+            }
+        }
+
+        return minSecurityValueStep;
     }
 
 

@@ -8,7 +8,7 @@ namespace _2024._01;
 public sealed class Day01 : Base
 {
     
-    public Day01()
+    public Day01(bool example) : base(example)
     {
         Day = "01";
     }
@@ -36,9 +36,9 @@ public sealed class Day01 : Base
         }
     }
     
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         ParseInput(input, out List<int> firstIdList, out List<int> secondIdList);
         Debug.Assert(firstIdList.Count == secondIdList.Count);
 
@@ -55,9 +55,9 @@ public sealed class Day01 : Base
         return distances.ToString();
     }
 
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         ParseInput(input, out List<int> firstIdList, out List<int> secondIdList);
         Debug.Assert(firstIdList.Count == secondIdList.Count);
         

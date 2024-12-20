@@ -11,7 +11,7 @@ namespace _2024._07;
 
 public class Day07 : Base
 {
-    public Day07()
+    public Day07(bool example) : base(example) 
     {
         Day = "7";
     }
@@ -90,9 +90,9 @@ public class Day07 : Base
         return false;
     }
     
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         ulong totalCalibrationResult = 0;
         foreach (string line in input)
         {
@@ -107,9 +107,9 @@ public class Day07 : Base
         return totalCalibrationResult;
     }
     
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         ulong totalCalibrationResult = 0;
         foreach (string line in input)
         {

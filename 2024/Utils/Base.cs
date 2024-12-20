@@ -2,13 +2,16 @@
 
 using System.Diagnostics;
 
-public abstract class Base
+public abstract class Base(bool example)
 {
-    private string _day = "";
+    
+    protected readonly bool _example = example; 
+    
+    private readonly string _day = "";
     protected string Day
     {
-        get { return _day;}
-        init { _day = value.PadLeft(2, '0'); } 
+        get => _day;
+        init => _day = value.PadLeft(2, '0');
     }
 
     protected string ClassPath
@@ -20,28 +23,21 @@ public abstract class Base
         }
     }
 
-    protected string ExampleData
-    {
-        get { return Path.Combine(ClassPath, "example"); }
-    }
+    private string ExampleData => Path.Combine(ClassPath, "example");
+    private string RealData => Path.Combine(ClassPath, "input");
 
-    protected string RealData
-    {
-        get { return Path.Combine(ClassPath, "input"); }
-    }
-    
-    public abstract object PartOne(bool example);
-    public abstract object PartTwo(bool example);
+    public abstract object PartOne();
+    public abstract object PartTwo();
 
     public virtual void Reset()
     {
         
     }
     
-    protected virtual string[] ReadInput(bool example)
+    protected virtual string[] ReadInput()
     {
         string path = RealData;
-        if (example)
+        if (_example)
         {
             path = ExampleData;
         }
@@ -59,7 +55,7 @@ public abstract class Base
 
 public static class BaseExtensions
 {
-    public static void Solve(this Base problem, bool example, List<Stages> stages)
+    public static void Solve(this Base problem, List<Stages> stages)
     {
         List<ValueTuple<Stages, string, double, long>> results = [];
         int maxLength = 0;
@@ -69,8 +65,8 @@ public static class BaseExtensions
             stopwatch.Start();
             string solution = stage switch
             {
-                Stages.One => problem.PartOne(example).ToString() ?? "",
-                Stages.Two => problem.PartTwo(example).ToString() ?? "",
+                Stages.One => problem.PartOne().ToString() ?? "",
+                Stages.Two => problem.PartTwo().ToString() ?? "",
                 _ => throw new Exception($"Unknown stage {stage}")
             };
             stopwatch.Stop();

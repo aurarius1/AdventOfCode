@@ -9,7 +9,7 @@ namespace _2024._12;
 
 public class Day12 : Base
 {
-    public Day12()
+    public Day12(bool example) : base(example) 
     {
         Day = "12";
     }
@@ -126,7 +126,7 @@ public class Day12 : Base
 
     private int SolvePuzzle(bool example, int stage)
     {
-        _input = ReadInput(example);
+        _input = ReadInput();
         List<ValueTuple<char, int, int>> farmfields = [];
         HashSet<ValueTuple<int, int>> visitedAreas = [];
         
@@ -154,15 +154,15 @@ public class Day12 : Base
         return price;
     }
     
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        return SolvePuzzle(example, 1);
+        return SolvePuzzle(_example, 1);
 
     }
 
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        return SolvePuzzle(example, 2);
+        return SolvePuzzle(_example, 2);
     }
 
     public override void Reset()

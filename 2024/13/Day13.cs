@@ -11,7 +11,7 @@ namespace _2024._13;
 
 public class Day13 : Base
 {
-    public Day13()
+    public Day13(bool example) : base(example) 
     {
         Day = "13";
     }
@@ -62,15 +62,15 @@ public class Day13 : Base
         return cost;
     }
     
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         return SolvePuzzle(input, 1);
     }
 
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         return SolvePuzzle(input, 2);
     }
 

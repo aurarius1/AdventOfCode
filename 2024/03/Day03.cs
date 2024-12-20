@@ -5,14 +5,14 @@ namespace _2024._03;
 
 public class Day03 : Base
 {
-    public Day03()
+    public Day03(bool example) : base(example)
     {
         Day = "3";
     }
 
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         int solution = 0;
         Regex pattern = new Regex("mul\\([0-9]{1,3},[0-9]{1,3}\\)");
         MatchCollection matches = pattern.Matches(String.Join("", input));
@@ -26,9 +26,9 @@ public class Day03 : Base
         return solution;
     }
 
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         int solution = 0;
         bool mulEnabled = true;
         Regex pattern = new Regex("mul\\([0-9]{1,3},[0-9]{1,3}\\)|don't\\(\\)|do\\(\\)");

@@ -11,7 +11,7 @@ namespace _2024._08;
 
 public class Day08 : Base
 {
-    public Day08()
+    public Day08(bool example) : base(example) 
     {
         Day = "8";
     }
@@ -80,15 +80,15 @@ public class Day08 : Base
         return antinodes.Distinct().Count();
     }
     
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         return SolvePuzzle(input, 1);
     }
     
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         return SolvePuzzle(input, 2);
     }
 }

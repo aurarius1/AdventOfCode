@@ -4,7 +4,7 @@ namespace _2024._02;
 
 public class Day02 : Base
 {
-    public Day02()
+    public Day02(bool example) : base(example)
     {
         Day = "02";
     }
@@ -42,9 +42,9 @@ public class Day02 : Base
         return 1;
     }
     
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         int safeReadings = 0;
         foreach(var line in input)
         {
@@ -54,9 +54,9 @@ public class Day02 : Base
         return safeReadings;
     }
 
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         int safeReadings = 0;
         foreach(var line in input)
         {

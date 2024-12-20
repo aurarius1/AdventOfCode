@@ -20,15 +20,15 @@ internal class FsBlock
 
 public class Day09 : Base
 {
-    public Day09()
+    public Day09(bool example) : base(example) 
     {
         Day = "9";
     }
     
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
         List<ValueTuple<bool, ulong?>> fs = [];
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         ulong fileId = 0;
         foreach ((char fsPos, int idx) in input[0].Enumerate())
         {
@@ -153,9 +153,9 @@ public class Day09 : Base
         return checksum;
     }
     
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         
         LinkedList<FsBlock> fs = [];
         

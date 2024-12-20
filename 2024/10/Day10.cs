@@ -11,7 +11,7 @@ namespace _2024._10;
 
 public class Day10 : Base
 {
-    public Day10()
+    public Day10(bool example) : base(example) 
     {
         Day = "10";
     }
@@ -76,7 +76,7 @@ public class Day10 : Base
 
     private int SolvePuzzle(bool example, int stage)
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         Map = new int[input.Length][];
         for (int row = 0; row < input.Length; row++)
         {
@@ -101,14 +101,14 @@ public class Day10 : Base
         return score;
     }
     
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        return SolvePuzzle(example, 1);
+        return SolvePuzzle(_example, 1);
     }
 
 
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        return SolvePuzzle(example, 2);
+        return SolvePuzzle(_example, 2);
     }
 }

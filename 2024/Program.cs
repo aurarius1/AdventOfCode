@@ -1,4 +1,5 @@
-﻿using _2024.Utils;
+﻿using System.Reflection;
+using _2024.Utils;
 
 namespace _2024
 {
@@ -26,19 +27,10 @@ namespace _2024
                 (part1 || stage != Stages.One) && 
                 (part2 || stage != Stages.Two)).ToList();
         }
-        
-        
-        static void Main(string[] args)
-        {
-            // Check if a day number was passed as an argument
-            if (args.Length == 0)
-            {
-                Console.WriteLine("Please provide the day number as an argument (e.g., 01 for Day01).");
-                System.Environment.Exit(-1);
-            }
-            ParseArguments(args, out List<Stages> stages, out bool example, out string dayNumber);
 
-            var className = $"_2024._{dayNumber}.Day{dayNumber}";
+        static void RunDay(string dayNumber, List<Stages> stages, bool example)
+        {
+            string className = $"_2024._{dayNumber}.Day{dayNumber}";
             Type? dayType = null;
             try
             {
@@ -46,24 +38,48 @@ namespace _2024
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-                System.Environment.Exit(-1);
+                Console.WriteLine($"Class {className} could not be found, maybe it wasn't solved yet!");
+                return;
             }
-            
             if (dayType == null || !typeof(Base).IsAssignableFrom(dayType))
             {
-                Console.WriteLine($"Class {className} not found. Make sure the namespace and class name match.");
-                System.Environment.Exit(-1);
+                Console.WriteLine($"Class {className} could not be found, maybe it wasn't solved yet!");
+                return;
+            }
+            ConstructorInfo? constructor = dayType.GetConstructor([typeof(bool)]);
+            if (constructor == null)
+            {
+                throw new InvalidProgramException();
             }
             
-            var day = (Base?)Activator.CreateInstance(dayType);
+            Base? day = (Base?)constructor.Invoke([example]);
             if (day == null)
             {
-                Console.WriteLine($"Unable to create an instance of {className}.");
-                System.Environment.Exit(-1);
+                throw new InvalidProgramException($"Unable to create an instance of {className}.");
             }
 
-            day.Solve(example, stages);
+            day.Solve(stages);
+        }
+        
+        static void Main(string[] args)
+        {
+            // Check if a day number was passed as an argument
+            List<Stages> stages = [Stages.One, Stages.Two];
+            bool example = false;
+            if (args.Length > 0)
+            {
+                ParseArguments(args, out stages, out example, out string dayNumber);
+                RunDay(dayNumber, stages, example);
+                return;
+            }
+            
+            for (int i = 1; i <= 25; i++)
+            {
+                string day = i.ToString().PadLeft(2, '0');
+                Console.WriteLine($"Running day {day}:");
+                RunDay(day, stages, example);
+                Console.WriteLine();
+            }
         }
     }
 }

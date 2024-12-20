@@ -4,14 +4,14 @@ namespace _2024._04;
 
 public class Day04 : Base
 {
-    public Day04()
+    public Day04(bool example) : base(example)
     {
         Day = "4";
     }
     
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         string puzzle = String.Join("", input);
 
         int numCols = input[0].Length, numRows = input.Length;
@@ -62,9 +62,9 @@ public class Day04 : Base
         return xmasCount;
     }
 
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         string puzzle = String.Join("", input);
 
         int numCols = input[0].Length, numRows = input.Length;

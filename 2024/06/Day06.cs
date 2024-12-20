@@ -10,7 +10,7 @@ namespace _2024._06;
 
 public class Day06 : Base
 {
-    public Day06()
+    public Day06(bool example) : base(example) 
     {
         Day = "6";
     }
@@ -91,9 +91,9 @@ public class Day06 : Base
     }
     
     
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
 
         Facility = string.Join("", input);
         Rows = input.Length; 
@@ -115,9 +115,9 @@ public class Day06 : Base
         return visited.Count;
     }
     
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
 
         Facility = string.Join("", input);
         Rows = input.Length; 

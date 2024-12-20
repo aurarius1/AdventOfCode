@@ -19,7 +19,7 @@ public struct Box
 
 public class Day15 : Base
 {
-    public Day15()
+    public Day15(bool example) : base(example) 
     {
         Day = "15";
     }
@@ -158,16 +158,16 @@ public class Day15 : Base
         return true;
     }
     
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         ParseInput(input, out List<char[]> map, out List<char> instructions, out ValueTuple<int, int> robot, 1);
         return PerformInstructions(map, instructions, robot, 1);
     }
 
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         ParseInput(input, out List<char[]> map, out List<char> instructions, out ValueTuple<int, int> robot, 2);
         return PerformInstructions(map, instructions, robot, 2);
     }

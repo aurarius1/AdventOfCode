@@ -9,7 +9,7 @@ namespace _2024._11;
 
 public class Day11 : Base
 {
-    public Day11()
+    public Day11(bool example) : base(example) 
     {
         Day = "11";
     }
@@ -68,15 +68,15 @@ public class Day11 : Base
     }
     
     
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         return SolvePuzzle(input[0], 1);
     }
 
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         return SolvePuzzle(input[0], 2);
     }
 }

@@ -6,7 +6,7 @@ namespace _2024._05;
 
 public class Day05 : Base
 {
-    public Day05()
+    public Day05(bool example) : base(example) 
     {
         Day = "5";
     }
@@ -63,9 +63,9 @@ public class Day05 : Base
         return 1;
     }
     
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         int middleNumbersSum = 0;
         int updatesStart = ReadRules(input, out List<(int, int)> orderRules);
         for (int i = updatesStart; i < input.Length; i++)
@@ -79,9 +79,9 @@ public class Day05 : Base
         return middleNumbersSum;
     }
 
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         int middleNumbersSum = 0;
         int updatesStart = ReadRules(input, out List<(int, int)> orderRules);
         for (int i = updatesStart; i < input.Length; i++)

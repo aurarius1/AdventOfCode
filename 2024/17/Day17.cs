@@ -6,7 +6,7 @@ namespace _2024._17;
 
 public class Day17 : Base
 {
-    public Day17()
+    public Day17(bool example) : base(example) 
     {
         Day = "17";
     }
@@ -77,9 +77,9 @@ public class Day17 : Base
         return string.Join(",", output);
     }
 
-    public override object PartOne(bool example)
+    public override object PartOne()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
 
         // three registers
         List<long> registers = new List<long>(3);
@@ -105,9 +105,9 @@ public class Day17 : Base
         return RunProgram(instructions, registers, 1);
     }
 
-    public override object PartTwo(bool example)
+    public override object PartTwo()
     {
-        string[] input = ReadInput(example);
+        string[] input = ReadInput();
         // three registers
         List<long> registers = new(3);
         List<int> instructions = [];
