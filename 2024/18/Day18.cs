@@ -80,7 +80,7 @@ public class Day18 : Base
     {
         string[] input = ReadInput();
         ValueTuple<int, int> start = (0, 0);
-        ValueTuple<int, int> end = _example ? (7, 7) : (71, 71);
+        ValueTuple<int, int> end = Example ? (7, 7) : (71, 71);
         List<char[]> memoryArea = new(end.Item1);
         SortedSet<ValueTuple<int, int>> corruptingBytes = [];
         for (int i = 0; i < end.Item1; i++)
@@ -90,7 +90,7 @@ public class Day18 : Base
         
         foreach ((string bytePos, int idx) in input.Enumerate())
         {
-            if (idx == (_example ? 12 : 1024))
+            if (idx == (Example ? 12 : 1024))
             {
                 break;
             }
@@ -105,7 +105,7 @@ public class Day18 : Base
     {
         string[] input = ReadInput();
         ValueTuple<int, int> start = (0, 0);
-        ValueTuple<int, int> end = _example ? (7, 7) : (71, 71);
+        ValueTuple<int, int> end = Example ? (7, 7) : (71, 71);
         List<char[]> memoryArea = new(end.Item1);
         for (int i = 0; i < end.Item1; i++)
         {

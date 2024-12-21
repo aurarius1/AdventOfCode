@@ -114,11 +114,11 @@ public class Day10Refactored : Base
     
     public override object PartOne()
     {
-        return SolvePuzzle(_example, 1);
+        return SolvePuzzle(Example, 1);
     }
     
     public override object PartTwo()
     {
-        return SolvePuzzle(_example, 2);
+        return SolvePuzzle(Example, 2);
     }
 }

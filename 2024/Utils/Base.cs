@@ -5,7 +5,7 @@ using System.Diagnostics;
 public abstract class Base(bool example)
 {
     
-    protected readonly bool _example = example; 
+    protected readonly bool Example = example; 
     
     private readonly string _day = "";
     protected string Day
@@ -34,10 +34,10 @@ public abstract class Base(bool example)
         
     }
     
-    protected virtual string[] ReadInput()
+    protected string[] ReadInput()
     {
         string path = RealData;
-        if (_example)
+        if (Example)
         {
             path = ExampleData;
         }

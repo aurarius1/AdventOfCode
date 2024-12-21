@@ -99,7 +99,7 @@ public class Day20 : Base
                     int saving = pathWithoutCheats - (time + pathWithoutCheats - value + cheatCost);
                     //saving = value - time + cheatCost;
                     
-                    if (saving >= (_example ? 1 : 100))
+                    if (saving >= (Example ? 1 : 100))
                     {
                         totalNumberOfCheats++;
                     }
