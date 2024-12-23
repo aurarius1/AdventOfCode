@@ -1,6 +1,6 @@
 repos:
     - repo: https://github.com/LiquidFun/aoc_tiles
-      rev: 0.5.5
+      rev: 0.6.3
       hooks:
           - id: aoc-tiles
             # Optionally use these arguments. Auto add tiles to git adds the tiles to git,
@@ -11,6 +11,6 @@ repos:
             # Simply remove the comments (#) below for args and the flags you want.
             args:
               - --auto-add-tiles-to-git=amend
-              - --verbose
+            #  - --verbose
             #     - --language-sorting=jl,kt,py,rs
             #     - --exclude-patterns="2021/*/*.apl,2021/*/*.py,2021/*/*.cpp"

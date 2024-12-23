@@ -1,6 +1,9 @@
 <!-- AOC TILES BEGIN -->
 <h1 align="center">
-  2024 - 46 ⭐
+  Advent of Code - 180/496 ⭐
+</h1>
+<h1 align="center">
+  2024 - 46 ⭐ - Smalltalk
 </h1>
 <a href="2024/01/Day01.cs">
   <img src=".aoc_tiles/tiles/2024/01.png" width="161px">
@@ -72,7 +75,7 @@
   <img src=".aoc_tiles/tiles/2024/23.png" width="161px">
 </a>
 <h1 align="center">
-  2023 - 50 ⭐
+  2023 - 50 ⭐ - Python
 </h1>
 <a href="2023/01/C/main.cpp">
   <img src=".aoc_tiles/tiles/2023/01.png" width="161px">
@@ -150,7 +153,7 @@
   <img src=".aoc_tiles/tiles/2023/25.png" width="161px">
 </a>
 <h1 align="center">
-  2022 - 50 ⭐
+  2022 - 50 ⭐ - Python
 </h1>
 <a href="2022/01/Python/main.py">
   <img src=".aoc_tiles/tiles/2022/01.png" width="161px">
@@ -228,7 +231,7 @@
   <img src=".aoc_tiles/tiles/2022/25.png" width="161px">
 </a>
 <h1 align="center">
-  2021 - 34 ⭐
+  2021 - 34 ⭐ - C++
 </h1>
 <a href="2021/01/main.cpp">
   <img src=".aoc_tiles/tiles/2021/01.png" width="161px">
