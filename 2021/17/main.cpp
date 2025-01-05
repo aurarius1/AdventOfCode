@@ -1,22 +1,8 @@
 #include <iostream>
 #include <chrono>
-#include <fstream>
-#include <unordered_set>
-#include <unordered_map>
 #include <queue>
-#include <numeric>
-#include <set>
 #include "../Utils/utils.h"
-#include "../Utils/Vector.h"
-typedef std::vector<std::string> puzzle_t;
-
-void quadraticFormula(double b, double c, int x){
-    std::cout << x*x + b*x + c << "\n";
-}
-
-int gauss(int time){
-    return (time*(time+1))/2;
-}
+#include "../Utils/types.h"
 
 void stage1(const puzzle_t& puzzle) {
 

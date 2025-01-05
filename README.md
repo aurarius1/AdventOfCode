@@ -1,6 +1,6 @@
 <!-- AOC TILES BEGIN -->
 <h1 align="center">
-  Advent of Code - 184/500 ⭐
+  Advent of Code - 186/500 ⭐
 </h1>
 <h1 align="center">
   2024 - 50 ⭐ - Smalltalk
@@ -237,7 +237,7 @@
   <img src=".aoc_tiles/tiles/2022/25.png" width="161px">
 </a>
 <h1 align="center">
-  2021 - 34 ⭐ - C++
+  2021 - 36 ⭐ - C++
 </h1>
 <a href="2021/01/main.cpp">
   <img src=".aoc_tiles/tiles/2021/01.png" width="161px">
@@ -289,5 +289,8 @@
 </a>
 <a href="2021/17/main.cpp">
   <img src=".aoc_tiles/tiles/2021/17.png" width="161px">
+</a>
+<a href="2021/18/main.cpp">
+  <img src=".aoc_tiles/tiles/2021/18.png" width="161px">
 </a>
 <!-- AOC TILES END -->
