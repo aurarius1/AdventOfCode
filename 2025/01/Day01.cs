@@ -1,7 +1,6 @@
 ﻿
 using System.Diagnostics;
 using System;
-
 using _2025.Utils;
 
 
@@ -15,7 +14,6 @@ public enum Rotation
 
 public sealed class Day01 : Base
 {
-    
     public Day01(bool example) : base(example)
     {
         Day = "01";
