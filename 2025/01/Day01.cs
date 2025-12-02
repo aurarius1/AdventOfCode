@@ -34,7 +34,6 @@ public sealed class Day01 : Base
         foreach((Rotation rotation, int steps) in Parse(input))
         {
             int dir = rotation == Rotation.LEFT ? -steps : steps;
-
             dialPosition = MathExtensions.Modulo(dialPosition+dir, 100); 
             if(dialPosition == 0)
             {
@@ -51,7 +50,6 @@ public sealed class Day01 : Base
         int password = 0;
         foreach((Rotation rotation, int steps) in Parse(input))
         {
-
             if(rotation == Rotation.LEFT)
             {
                 // wrap around first to prevent counting starting from zero as hitting a zero once
@@ -68,8 +66,6 @@ public sealed class Day01 : Base
                 password += (int)Math.Floor((dialPosition + steps) / 100.0f);
                 dialPosition = MathExtensions.Modulo(dialPosition+steps, 100);
             }
-            
-            
         }
         return password.ToString(); 
     }
