@@ -1,5 +1,6 @@
-﻿using System.Reflection;
-using _2025.Utils;
+﻿global using _2025.Utils;
+
+using System.Reflection;
 
 namespace _2025
 {
