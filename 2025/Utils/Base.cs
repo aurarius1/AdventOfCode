@@ -4,7 +4,6 @@ using System.Diagnostics;
 
 public abstract class Base(bool example)
 {
-    
     protected readonly bool Example = example; 
     
     private readonly string _day = "";

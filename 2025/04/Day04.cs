@@ -6,28 +6,22 @@ namespace _2025._04
 {
     public sealed class Day04 : Base
     {
+        private string[] _input = [];
         public Day04(bool example) : base(example)
         {
             Day = "04";
         }
 
-        private string[] _input;
-        
-
-        private bool RollAccessible(int row, int col, int rows, int cols)
+        private bool PaperRollAccessible(int row, int col)
         {
-            int adjacentRolls = 0;
-            var steps = new (int, int)[]{(-1, -1), (-1, 0), (0, -1), (1, 0), (0, 1), (1, 1), (-1, 1), (1, -1)};
-            foreach((int stepRow, int stepCol) in steps)
+            if (_input[row][col] != '@')
             {
-                int newRow = row + stepRow;
-                int newCol = col + stepCol; 
-                if(_input.TryGetValue((row+stepRow, col+stepCol), out char? value) && value == '@')
-                {
-                    adjacentRolls++;
-                }
+                return false;
             }
-            return adjacentRolls < 4;
+            var steps = new []{(-1, -1), (-1, 0), (0, -1), (1, 0), (0, 1), (1, 1), (-1, 1), (1, -1)};
+            return steps.Select(x => 
+                (_input.TryGetValue((row + x.Item1, col + x.Item2), out var value) && value == '@') ? 1 : 0
+            ).Sum() < 4;
         }
 
         public override object PartOne()
@@ -38,41 +32,37 @@ namespace _2025._04
             {
                 for(int col = 0; col < _input[row].Length; col++)
                 {
-                    if (_input[row][col] == '@' && RollAccessible(row, col, _input.Length, _input[row].Length))
+                    if (PaperRollAccessible(row, col))
                     {
                         accessibleRolls++;
                     } 
                 }
             }
-            return accessibleRolls.ToString();
+            return accessibleRolls;
         }
 
         public override object PartTwo()
         {
             _input = ReadInput();
-            int accessibleRolls = 0;
-            while (true)
-            {   
-                int currAccessible = 0;
-                for(int row = 0; row < _input.Length; row++)
+            int accessibleRolls = 0, currAccessible;
+            do
+            {
+                currAccessible = 0;
+                for (int row = 0; row < _input.Length; row++)
                 {
-                    for(int col = 0; col < _input[row].Length; col++)
+                    for (int col = 0; col < _input[row].Length; col++)
                     {
-                        if (_input[row][col] == '@' && RollAccessible(row, col, _input.Length, _input[row].Length))
+                        if (!PaperRollAccessible(row, col))
                         {
-                            currAccessible++;
-                            _input[row] = _input[row].Substring(0, col) + "." + _input[row].Substring(col + 1);
-
-                        } 
+                            continue;
+                        }
+                        currAccessible++;
+                        _input[row] = _input[row][..col] + "." + _input[row][(col + 1)..];
                     }
                 }
-                if(currAccessible == 0)
-                {
-                    break;
-                }
                 accessibleRolls += currAccessible;
-            }
-            return accessibleRolls.ToString();
+            } while (currAccessible > 0);
+            return accessibleRolls;
         }
     }
 }

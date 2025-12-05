@@ -1,5 +1,4 @@
 ﻿global using _2025.Utils;
-
 using System.Reflection;
 
 namespace _2025
@@ -74,7 +73,7 @@ namespace _2025
                 return;
             }
             
-            for (int i = 1; i <= 25; i++)
+            for (int i = 1; i <= 12; i++)
             {
                 string day = i.ToString().PadLeft(2, '0');
                 Console.WriteLine($"Running day {day}:");
