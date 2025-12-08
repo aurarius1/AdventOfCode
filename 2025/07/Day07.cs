@@ -8,6 +8,7 @@ namespace _2025._07
         public ulong PossiblePaths;
         public bool HitSplitter; // used for stage 1
     }
+    
     public sealed class Day07 : Base
     {
         private string[] _TachyonManifold;
@@ -75,7 +76,11 @@ namespace _2025._07
         public override object PartOne()
         {
             SimulateTachyonBeam(PrepareInput());
-            return _cache.Where(x => x.Value.HitSplitter).Select(x => x.Key).ToHashSet().Count;
+            return _cache
+                .Where(x => x.Value.HitSplitter)
+                .Select(x => x.Key)
+                .ToHashSet()
+                .Count;
         }
 
         public override object PartTwo()
