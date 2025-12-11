@@ -1,9 +1,9 @@
 <!-- AOC TILES BEGIN -->
 <h1 align="center">
-  Advent of Code - 204/518 ⭐
+  Advent of Code - 206/524 ⭐
 </h1>
 <h1 align="center">
-  2025 - 18 ⭐ - Smalltalk
+  2025 - 20 ⭐ - Smalltalk
 </h1>
 <a href="2025/01/Day01.cs">
   <img src=".aoc_tiles/tiles/2025/01.png" width="161px">
@@ -31,6 +31,9 @@
 </a>
 <a href="2025/09/Day09.cs">
   <img src=".aoc_tiles/tiles/2025/09.png" width="161px">
+</a>
+<a href="2025/10/Day10.cs">
+  <img src=".aoc_tiles/tiles/2025/10.png" width="161px">
 </a>
 <h1 align="center">
   2024 - 50 ⭐ - Smalltalk
